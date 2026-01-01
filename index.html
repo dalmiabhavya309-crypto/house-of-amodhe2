@@ -3,601 +3,449 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>House of Amodhe   Café Ambré</title>
+<title>House of Amodhe – Café Ambré</title>
 <meta name="description" content="House of Amodhe. Café Ambré. Limited monthly release of twenty bottles." />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
 
 <style>
+/* ==============================
+   DIOR-LEVEL LUXURY SYSTEM
+   ============================== */
 :root{
-  --parchment:#12100E;          /* deeper dark base */
-  --parchment-soft:#1A1714;     /* darker alternate sections */
-  --ink:#F2EFEA;                /* soft off-white text */
-  --ink-muted:#C2BBB2;          /* muted warm text */
-  --accent:#8C6A3D;             /* darker amber accent */
-  --line:rgba(255,255,255,.06);
+  /* IVORY & BROWN GOURMAND LUXURY PALETTE */
+  --bg-main:#F4EFE8;            /* warm ivory */
+  --bg-soft:#EFE6DA;            /* soft parchment */
+  --ink:#2A1E16;                /* deep coffee ink */
+  --ink-muted:#6F5A4A;          /* warm brown text */
+  --accent:#8B5A2B;             /* caramel brown */
+  --line:rgba(0,0,0,.08);
 }
+
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{overflow-x:hidden}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes heroFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes glowPulse{0%{opacity:.25}50%{opacity:.6}100%{opacity:.25}}
+@keyframes smokeDrift{0%{transform:translateY(0) translateX(0)}50%{transform:translateY(-5%) translateX(3%)}100%{transform:translateY(0) translateX(0)}}
+
+.reveal{opacity:0;transform:translateY(22px)}
+.reveal.visible{opacity:1;transform:none;transition:opacity 1.1s ease, transform 1.1s ease}
+
 body{
   font-family:Inter,sans-serif;
+  background:radial-gradient(1200px 700px at 50% -10%, #FFFFFF 0%, var(--bg-main) 45%, #E8DDCF 100%);
   color:var(--ink);
-  line-height:2.1;
-  background:var(--parchment);
+  line-height:2;
+  overflow-x:hidden;
+  position:relative;
 }
 
-nav{
+/* SMOKE + AMBER GLOW (SUBTLE, COUTURE) */
+body::before{
+  content:"";
   position:fixed;
-  top:0;left:0;right:0;
-  padding:14px 18px;
-  display:flex;
-  justify-content:space-between;
+  inset:-30%;
+  background:
+    radial-gradient(45% 35% at 25% 30%, rgba(0,0,0,.04), transparent 70%),
+    radial-gradient(40% 30% at 70% 40%, rgba(0,0,0,.03), transparent 75%),
+    radial-gradient(35% 30% at 50% 70%, rgba(0,0,0,.025), transparent 80%),
+    radial-gradient(30% 25% at 30% 25%, rgba(139,90,43,.18), transparent 75%),
+    radial-gradient(35% 30% at 70% 65%, rgba(139,90,43,.16), transparent 80%);
+  filter:blur(48px);
+  opacity:.55;
+  animation:smokeDrift 60s linear infinite;
+  pointer-events:none;
+  z-index:0;
+}
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:radial-gradient(85% 65% at center, transparent 60%, rgba(0,0,0,.12) 100%);
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ==============================
+   HEADER
+   ============================== */
+nav{
+  position:fixed;top:0;left:0;right:0;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
   align-items:center;
-  background:#0E0C0A; /* distinct darker top strip */
-  border-bottom:1px solid rgba(140,106,61,.25); /* subtle amber separation */
-  backdrop-filter:blur(12px);
+  padding:14px 18px;
+  background:rgba(244,239,232,.85);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(159,107,52,.25);
   z-index:10;
 }
+nav .nav-left{justify-self:start;display:flex;gap:18px}
+nav .nav-right{justify-self:end;display:flex;gap:14px}
 nav a{
   color:var(--ink-muted);
-  text-decoration:none;
   font-size:10px;
-  letter-spacing:.18em;
+  letter-spacing:.22em;
   text-transform:uppercase;
-  margin-left:14px;
+  text-decoration:none;
 }
-
-section{
-  padding:64px 18px;
-  max-width:1100px;
-  margin:0 auto;
-  position:relative;
-  background:var(--parchment);
-}
-
-/* DARKEN ALTERNATE SECTIONS */
-section:nth-of-type(even){
-  background:var(--parchment-soft);
-}
-
-/* INGREDIENT BACKGROUND MOTIFS REMOVED */
-section::before{display:none}
-footer::before{display:none}
-
-/* SECTION DIVIDER   VANILLA PODS */
-.section-divider{
-  width:100%;
-  height:72px;
-  background:var(--parchment);
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.section-divider::before{
-  content:"";
-  width:220px;
-  height:6px;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      #5C4528 0px,
-      #5C4528 18px,
-      transparent 18px,
-      transparent 30px
-    );
+nav a:hover{color:var(--accent)}
+.nav-buy{
+  padding:8px 18px;
+  border:1px solid rgba(159,107,52,.45);
   border-radius:999px;
-  opacity:.55;
-}
-.section-divider::after{
-  content:"";
-  position:absolute;
-  width:220px;
-  height:2px;
-  top:50%;
-  transform:translateY(-50%);
-  background:rgba(0,0,0,.04);
-}
-.section-divider::after{
-  content:"";
-  position:absolute;
-  left:50%;
-  top:50%;
-  width:120px;
-  height:1px;
-  background:var(--line);
-  transform:translate(-50%,-50%);
-}
-
-.hero{
-  min-height:60vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding-top:96px;
-}
-.hero h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(34px,8vw,86px);
-  letter-spacing:.06em;
   color:var(--ink);
-}
-.hero p{
-  margin-top:20px;
-  color:var(--ink-muted);
-  font-size:15px;
-  max-width:720px;
-}
-
-h2{
-  font-family:'Playfair Display',serif;
-  font-weight:400;
-  font-size:clamp(32px,6vw,48px);
-  letter-spacing:.02em;
-  color:var(--ink);
-}
-
-/* CENTER PHILOSOPHY CONTENT */
-.center-philosophy{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
-}
-.center-philosophy p{
-  margin-left:auto;
-  margin-right:auto;
-}
-p{
-  margin-top:36px;
-  color:var(--ivory-muted);
-  font-size:16px;
-  max-width:720px;
-}
-
-.product{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:24px;
-  margin-top:24px;
-}
-.product img{width:100%;max-width:380px;display:block;margin:0 auto}
-
-.price{margin-top:26px;font-family:'Playfair Display',serif;font-size:26px}
-.price span{display:block;font-size:14px;color:var(--ivory-muted)}
-
-.availability{
-  margin-top:28px;
-  padding-top:18px;
-  border-top:1px solid var(--line);
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-  max-width:420px;
-}
-.availability span{font-size:11px;letter-spacing:.14em;text-transform:uppercase}
-.availability strong{
-  font-family:'Playfair Display',serif;
-  font-size:28px;
-  color:var(--accent);
-}
-
-.bean-btn{
-  margin-top:28px;
-  padding:0 42px;
-  height:56px;
-  border-radius:999px;
-  background:var(--ink);
-  color:var(--parchment);
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  font-size:12px;
-  letter-spacing:.26em;
-  text-transform:uppercase;
-  cursor:pointer;
-  transition:background .3s ease, transform .3s ease;
 }
-.bean-btn:hover{
-  background:var(--accent);
-  color:var(--parchment);
-  transform:translateY(-1px);
+.nav-buy:hover{
+  background:linear-gradient(135deg,#9F6B34,#C18A4A);
+  color:#120D09;
 }
-.bean-btn:active{
-  transform:translateY(0);
+.nav-cart{
+  background:linear-gradient(135deg,#F6F0E8,#DED3C6);
+  color:#120D09;
+}
+.nav-cart:hover{
+  background:linear-gradient(135deg,#9F6B34,#C18A4A);
+  color:#120D09;
 }
 
+/* ==============================
+   LAYOUT
+   ============================== */
+section{
+  padding:78px 18px;
+  max-width:960px;
+  margin:0 auto;
+  position:relative;
+  z-index:1;
+}
+section:nth-of-type(even){background:linear-gradient(180deg, #EFE6DA 0%, #F6F1EA 100%)}
+
+.section-divider{height:70px;display:flex;align-items:center;justify-content:center}
+.section-divider::before{
+  content:"";
+  width:220px;height:1px;
+  background:linear-gradient(to right,transparent,var(--accent),transparent);
+  animation:glowPulse 7s ease-in-out infinite;
+}
+
+.hero{min-height:70vh;display:flex;align-items:center;justify-content:center;text-align:center}
+.hero>div{animation:heroFade 1.8s ease forwards}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(38px,9vw,86px);letter-spacing:.04em}
+.hero p{margin-top:18px;color:var(--ink-muted)}
+
+h2{font-family:'Playfair Display',serif;font-size:clamp(30px,6vw,46px);text-align:center}
+h2::after{content:"";display:block;margin:18px auto 0;width:72px;height:1px;background:linear-gradient(to right,transparent,var(--accent),transparent)}
+
+p{margin:26px auto 0;max-width:700px;color:var(--ink-muted);text-align:center}
+
+/* ==============================
+   PRODUCT
+   ============================== */
+.product{display:grid;grid-template-columns:repeat(2,1fr);gap:36px;justify-items:center;margin-top:40px}
+.product>div{grid-column:1/-1}
+.product img{width:100%;max-width:360px;aspect-ratio:1/1;object-fit:cover;border-radius:12px}
+
+.price{margin-top:20px;font-family:'Playfair Display',serif;font-size:26px;text-align:center}
+.price span{display:block;font-size:14px;color:var(--ink-muted)}
+
+.availability{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:420px;margin-inline:auto}
+.availability span{font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.availability strong{font-size:26px;color:var(--accent)}
+
+/* ==============================
+   CART (FIXED)
+   ============================== */
 .cart{
   position:fixed;
-  right:0;
   top:0;
-  width:50vw;            /* HALF SCREEN ON DESKTOP */
-  max-width:520px;       /* HARD CAP FOR LUXURY PROPORTION */
-  height:100dvh;
-  background:var(--parchment-soft);
-  padding:20px 18px 96px;
+  right:0;
+  width:100vw;
+  max-width:420px;
+  height:100vh;
+  background:#F6F1EA;
+  box-shadow:-20px 0 60px rgba(0,0,0,.25);
   transform:translateX(100%);
   transition:transform .45s cubic-bezier(.4,0,.2,1);
   z-index:20;
+  padding:22px 18px 120px;
   overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
 }
 .cart.active{transform:translateX(0)}
-.cart::-webkit-scrollbar{width:4px}
-.cart::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2)}
-.cart.active{transform:translateX(0)}
-.cart-header{display:flex;justify-content:space-between;align-items:center}
+.cart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
 .close-cart{cursor:pointer;font-size:22px}
-.cart-item{margin-top:24px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.cart-item{display:flex;justify-content:space-between;align-items:center;margin-top:16px;font-size:14px}
 .remove-item{cursor:pointer;font-size:18px;opacity:.6}
 .remove-item:hover{opacity:1}
-.cart-item span{display:block;font-size:13px;color:var(--ivory-muted)}
-.cart-total{margin-top:32px;padding-top:22px;border-top:1px solid var(--line)}
-.checkout-group{
-  position:sticky;
-  bottom:0;
-  left:0;
-  margin-top:28px;
-  padding:14px 0 8px;
+.cart-total{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;line-height:1.7}
+
+/* ==============================
+   BUTTON SYSTEM (UNIFIED)
+   ============================== */
+/* Header buttons – smaller */
+.nav-buy,
+.nav-cart{
+  padding:0 18px;
+  height:38px;
+  font-size:9px;
+  letter-spacing:.22em;
+}
+
+/* Main primary CTA – HERO BUY BUTTON (TYPOGRAPHY ALIGNED) */
+.bean-btn{
+  padding:0 88px;
+  height:76px;
+  margin:52px auto 0;
+  background:linear-gradient(180deg,#FBF7F2 0%, #E9DBC9 100%);
+  border:1px solid rgba(139,90,43,.45);
+  border-radius:999px;
+  color:#2A1E16;
+  box-shadow:0 10px 22px rgba(0,0,0,.15);
   display:flex;
   flex-direction:column;
-  gap:10px;
-  background:linear-gradient(to top, var(--parchment-soft) 70%, rgba(239,232,222,0));
+  justify-content:center;
+  align-items:center;
+  gap:2px;
 }
-.checkout-btn{
-  width:100%;
-  padding:14px 16px;
-  border-radius:999px;
-  text-align:center;
+.bean-btn .btn-line-1{
+  font-size:15px;
+  letter-spacing:.32em;
+  font-weight:500;
+}
+.bean-btn .btn-line-2{
   font-size:11px;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  cursor:pointer;
-  background:var(--ink);
-  color:var(--parchment);
+  letter-spacing:.38em;
+  opacity:.8;
+}
+.bean-btn:hover{
+  background:linear-gradient(180deg,#9F6B34 0%, #C18A4A 100%);
+  color:#120D09;
+  transform:translateY(-1px);
+  box-shadow:0 14px 28px rgba(0,0,0,.22);
 }
 
-footer{
-  margin-top:72px;
-  padding:56px 22px;
-  border-top:1px solid var(--line);
+/* Checkout buttons – readable text */
+.checkout-btn{
+  padding:16px 22px;
+  height:auto;
   font-size:11px;
   letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--ink-muted);
-  display:grid;
-  gap:24px;
+  background:linear-gradient(135deg,#F6F0E8,#DED3C6);
+  color:#2A1E16;
+  border:1px solid rgba(159,107,52,.45);
 }
 
-@media(min-width:900px){
-  section{padding:64px 22px}
-  .product{grid-template-columns:1fr 1fr;gap:80px}
-  .availability{margin-top:22px}
-  footer{grid-template-columns:1fr 1fr 1fr}
+/* Shared hover */
+.bean-btn:hover,
+.nav-buy:hover,
+.nav-cart:hover,
+.checkout-btn:hover{
+  background:linear-gradient(135deg,#9F6B34,#C18A4A);
+  color:#120D09;
+  transform:translateY(-2px);
+  box-shadow:0 14px 30px rgba(0,0,0,.3);
 }
+
+/* ==============================
+   FOOTER
+   ============================== */
+footer{padding:58px 18px;border-top:1px solid var(--line);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-muted);display:grid;gap:26px;text-align:center}
 
 @media(max-width:600px){
-  nav{
-    padding:12px 14px;
-    flex-wrap:wrap;
-    gap:6px;
-  }
-  nav a{font-size:9px;letter-spacing:.14em}
-  section{padding:48px 16px}
-  .hero{min-height:52vh}
-  .hero h1{font-size:clamp(30px,10vw,44px)}
-  .hero p{font-size:14px;line-height:1.8}
-  h2{font-size:26px}
-  p{font-size:15px;line-height:1.9}
-  .product{grid-template-columns:1fr;gap:18px}
-  .product img{max-width:260px}
-  .availability{grid-template-columns:1fr 1fr 1fr}
-  .availability strong{font-size:22px}
-  .bean-btn{width:100%;height:48px;font-size:11px}
-  footer{grid-template-columns:1fr;font-size:10px}
-  .cart{width:100vw;max-width:100%}
-}
-  .cart-header h2{font-size:22px}
-  .cart-item{margin-top:18px}
-  .cart-item span{font-size:12px}
-  .remove-item{font-size:20px}
-}
-  .cart-header h2{
-    font-size:22px;
-  }
-  .cart-item{
-    margin-top:18px;
-  }
-  .cart-item span{
-    font-size:12px;
-  }
-  .remove-item{
-    font-size:20px;
-  }
-}
-  nav a{
-    margin:0 12px 0 0;
-    font-size:9px;
-  }
-  section{
-    padding:56px 18px;
-  }
-  .hero{
-    min-height:52vh;
-  }
-  .hero p{
-    font-size:14px;
-    line-height:1.9;
-  }
-  h2{
-    font-size:26px;
-  }
-  .product{
-    gap:20px;
-  }
-  .product img{
-    max-width:280px;
-    margin:0 auto;
-  }
-  .price{
-    font-size:20px;
-  }
-  .availability{
-    grid-template-columns:1fr 1fr 1fr;
-    gap:10px;
-  }
-  .availability strong{
-    font-size:22px;
-  }
-  .bean-btn{
-    width:100%;
-    height:50px;
-    font-size:11px;
-  }
-  .cart{
-    padding:22px;
-  }
-  footer{
-    padding:40px 18px;
-    font-size:10px;
-    line-height:1.8;
-  }
-}
-  nav a{margin-left:0;margin-right:14px}
-  .hero{min-height:58vh}
-  h2{font-size:28px}
-  .price{font-size:22px}
-  .availability{grid-template-columns:repeat(3,1fr)}
-  .bean-btn{width:100%;height:52px}
-  footer{grid-template-columns:1fr;text-align:left}
-  .cart{max-width:100%}
-}
-  .product{grid-template-columns:1fr 1fr;gap:80px}
-  .availability{margin-top:22px}
-  footer{grid-template-columns:1fr 1fr 1fr}
-}
-  footer{grid-template-columns:1fr 1fr 1fr}
+  .product{grid-template-columns:1fr}
+  nav{grid-template-columns:1fr auto;padding:12px 14px}
+  nav .nav-left{display:none}
+  nav a{font-size:9px}
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <div>House of Amodhe</div>
-  <div>
+  <div class="nav-left">
     <a href="#home">Home</a>
     <a href="#cafe">Café Ambré</a>
     <a href="#house">Philosophy</a>
-    <a href="#contact">Contact</a>
-    <a href="javascript:void(0)" onclick="openCart()">Cart (<span id="count">0</span>)</a>
+  </div>
+  <div class="nav-right">
+    <a class="nav-buy" href="javascript:void(0)" onclick="scrollToBuy()">Buy now</a>
+    <a class="nav-buy nav-cart" href="javascript:void(0)" onclick="openCart()">Cart (<span id="count">0</span>)</a>
   </div>
 </nav>
 
-<section id="home" class="hero">
+<section id="home" class="hero reveal">
   <div>
     <h1>House of Amodhe</h1>
-    <p>A perfume house devoted to restraint, time, and quiet intimacy.</p>
-    <p style="margin-top:12px;font-size:14px;letter-spacing:.08em">Limited monthly releases. Crafted in small batches.</p>
+    <p>Quiet perfumery. Made slowly.</p>
+    <p style="font-size:13px;letter-spacing:.18em;margin-top:10px;color:var(--ink-muted)">Limited availability. Twenty bottles, every month.</p>
   </div>
 </section>
 
 <div class="section-divider"></div>
 
-<section id="cafe">
+<section id="cafe" class="reveal">
   <h2>Café Ambré</h2>
   <div class="product">
-    <p style="margin:0 0 8px 0;font-size:15px;max-width:640px">
-      <em>An olfactive study in coffee, amber, and patience   composed to remain close, evolve slowly, and fade without excess.</em>
-    </p>
-    <img src="cafe-ambre.png" alt="Cafe Ambre Extrait de Parfum by House of Amodhe" />
+    <img src="images/Cafe_Ambre_Label.png" alt="Café Ambré label design" />
+    <img src="images/Cafe_Ambre_Ingredients_Background.png" alt="Café Ambré coffee chocolate vanilla notes" />
     <div>
-      <p>Café Ambré opens without urgency. There is no sharp citrus introduction, no sudden sweetness.</p>
-      <p>It settles into warmth   a dark, roasted coffee note softened by amber.</p>
-      <p>This is an extrait designed for time. It does not announce itself. It lingers.</p>
+      <p>Dark roasted coffee softened by warm amber.</p>
+      <p>A dry, restrained opening with no sweetness.</p>
+      <p>Stays close to skin, unfolding slowly.</p>
       <div class="price">₹ 5,999<span>$ 72 USD</span></div>
       <div class="availability">
-        <div style="grid-column:1/-1;font-size:11px;letter-spacing:.12em;opacity:.8">To preserve availability, purchases are limited to two bottles per customer.</div>
         <div><span>Monthly</span><strong>20</strong></div>
-        <div><span>Sold</span><strong>7</strong></div>
-        <div><span>Left</span><strong>13</strong></div>
+        <div><span>Sold</span><strong>13</strong></div>
+        <div><span>Left</span><strong>7</strong></div>
       </div>
-      <div class="bean-btn" onclick="handleBuyClick()">Buy now</div>
+      <div class="bean-btn" onclick="addToCart()"><span class="btn-line-1">BUY</span><span class="btn-line-2">NOW</span></div>
     </div>
   </div>
 </section>
 
 <div class="section-divider"></div>
 
-<section id="house" class="story center-philosophy">
-  <h2>The House of Amodhe</h2>
-
-  <p>House of Amodhe was created as a deliberate alternative to the pace of modern perfumery. Not as a rebellion, but as a quiet correction.</p>
-
-  <p>We believe fragrance was never meant to perform. It was meant to accompany. To exist close to the skin, unfolding slowly, revealing itself through time rather than demand.</p>
-
-  <p>At Amodhe, we design for skin   not for rooms. We do not chase projection, volume, or immediate impact. We value depth over intensity, texture over sharpness, and restraint over excess.</p>
-
-  <p>Every composition is allowed to mature before it is released. We do not rush creation to meet calendars, launches, or trends. A fragrance is ready only when it has settled into itself.</p>
-
-  <p>Production is intentionally limited. Not because we cannot make more, but because scale removes care. Limitation allows involvement   every batch, every bottle, every decision passing through human hands.</p>
-
-  <p>We believe luxury is not defined by rarity alone, but by intention. By the choice to stop. By the confidence to leave space.</p>
-
-  <p>House of Amodhe is not designed to be everywhere. It exists quietly, for those who notice. For those who understand that the most powerful presence is often the least demanding.</p>
-
-  <p>This is slow perfumery. This is restraint. This is Amodhe.</p>
+<section id="craft" class="reveal">
+  <h2>Craft and Time</h2>
+  <p>Time is treated as a material, never a constraint.</p>
+  <p>Each composition is allowed to rest and mature naturally.</p>
+  <p>Nothing is rushed. Nothing is forced.</p>
 </section>
 
 <div class="section-divider"></div>
 
-<footer id="contact">
+<section id="edition" class="reveal">
+  <h2>Edition Statement</h2>
+  <p>Café Ambré is released once every month.</p>
+  <p>Each edition is limited to twenty bottles only.</p>
+  <p>When sold out, production pauses until the next cycle.</p>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="limit" class="reveal">
+  <h2>Why We Limit Production</h2>
+  <p>Scale reduces attention. Speed reduces care.</p>
+  <p>Limitation allows every detail to remain considered.</p>
+  <p>Quality is protected by staying small.</p>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="faq" class="reveal">
+  <h2>Quiet Questions</h2>
+  <p><strong>Is Café Ambré gendered?</strong> No. It is composed for skin.</p>
+  <p><strong>Longevity?</strong> An extrait that evolves slowly for hours.</p>
+  <p><strong>Availability?</strong> Released monthly in limited quantity.</p>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="house" class="reveal">
+  <h2>The House of Amodhe</h2>
+  <p>A quiet alternative to modern perfumery.</p>
+  <p>Designed for intimacy, depth, and restraint.</p>
+  <p>This is slow perfumery.</p>
+</section>
+
+<footer>
   <div>
     HOUSE OF AMODHÈ<br><br>
-    Manufactured and marketed by:<br>
-    Shri shubh laxmi scales<br>
-    GST: 08AAMPD5461E1ZT
+    Manufactured & marketed by Shri Shubh Laxmi Scales<br>
+    GSTIN: 08AAMPD5461E1ZT
   </div>
   <div>
-    India<br>
     amodheperfumes@gmail.com<br>
-    www.amodhe.co.in<br>
     Instagram @amodheperfumes
   </div>
-  <div>
-    © 2025 House of Amodhè<br>
-    All rights reserved.
-  </div>
+  <div>© 2025 House of Amodhè</div>
 </footer>
 
 <div class="cart" id="cart">
   <div class="cart-header">
-    <h2>Cart</h2>
-    <div class="close-cart" onclick="closeCart()">×</div>
+    <strong>Cart</strong>
+    <span class="close-cart" onclick="closeCart()">×</span>
   </div>
-
-  <div style="margin-top:12px;font-size:11px;line-height:1.6;color:var(--ivory-muted)">
-    Manufactured and marketed by:<br>
-    Shri shubh laxmi scales<br>
-    GST: 08AAMPD5461E1ZT<br>
-    <span style="opacity:.8">GST included in ₹ 5,999</span>
+  <div style="margin-bottom:14px;font-size:11px;line-height:1.6;color:var(--ink-muted)">
+    <strong>Seller:</strong> Shri Shubh Laxmi Scales<br>
+    <strong>GSTIN:</strong> 08AAMPD5461E1ZT<br><br>
+    <strong>India:</strong> Prices shown are inclusive of all applicable taxes (GST included).<br>
+    <strong>International:</strong> Customs duties & import taxes (if any) are borne by the customer.
   </div>
-
-  <div id="items"></div>
-  <div class="cart-total" id="totalBlock"></div>
-
-  <div class="checkout-group">
-    <div class="checkout-btn" onclick="checkoutIndia()">Checkout India</div>
-    <div class="checkout-btn" onclick="checkoutInternational()">Checkout International</div>
-  </div>
-  </div>
-    
+  <div id="cartItems"></div>
+  <div class="cart-total"></div>
+  <div class="checkout-btn" id="checkoutIndiaBtn" onclick="checkoutIndia()">Checkout India</div>
+  <div class="checkout-btn" id="checkoutIntlBtn" onclick="checkoutInternational()">Checkout International</div>
 </div>
 
 <script>
-// --- Cart Logic (defined before usage is guaranteed) ---
-const PRICE_INR = 5999;
-const INTL_TOTAL_USD = 110;
-const INTL_PRODUCT_USD = 72;
-const INTL_DELIVERY_USD = INTL_TOTAL_USD - INTL_PRODUCT_USD;
+let cart=[];
+const PRICE_INR=5999;
+const INTL_PRODUCT_USD=72;
+const INTL_DELIVERY_USD=38;
+const INTL_TOTAL_USD=110;
 
-let cart = [];
-const MAX_PER_CUSTOMER = 2;
-let SOLD_OUT = false; // set true when monthly allocation is complete
-
-function handleBuyClick(){
-  if(SOLD_OUT){
-    openPrebookPopup();
-  } else {
-    addToCart();
-  }
-}
-
+function openCart(){document.getElementById('cart').classList.add('active')}
+function closeCart(){document.getElementById('cart').classList.remove('active')}
 function addToCart(){
-  if(cart.length >= MAX_PER_CUSTOMER){
-    alert('Limit reached: maximum 2 bottles per customer.');
-    openCart();
-    return;
-  }
+  if(cart.length>=2){alert('Maximum 2 bottles per customer');return}
   cart.push('Café Ambré');
-  updateCart();
+  renderCart();
   openCart();
-}
-
-function updateCart(){
-  document.getElementById('count').innerText = cart.length;
-  const el = document.getElementById('items');
-  el.innerHTML = '';
-
-  cart.forEach((_,index) => {
-    const d = document.createElement('div');
-    d.className = 'cart-item';
-    d.innerHTML = `
-      <div>
-        Café Ambré
-        <span>₹ ${PRICE_INR} / $ ${INTL_TOTAL_USD}</span>
-      </div>
-      <div class="remove-item" onclick="removeItem(${index})">×</div>
-    `;
-    el.appendChild(d);
-  });
-
-  document.getElementById('totalBlock').innerHTML = cart.length ? (
-    `India:<br>` +
-    `<strong>Total: ₹ ${PRICE_INR * cart.length}</strong><br>` +
-    `<span style='font-size:12px;opacity:.7'>Price includes GST</span>` +
-    `<br><br>International:<br>` +
-    `Product: $ ${INTL_PRODUCT_USD * cart.length}<br>` +
-    `Delivery: $ ${INTL_DELIVERY_USD * cart.length}<br>` +
-    `<strong>Total: $ ${INTL_TOTAL_USD * cart.length}</strong>`
-  ) : '';
-}
-
-function openCart(){
-  const cartEl = document.getElementById('cart');
-  cartEl.classList.add('active');
-  cartEl.scrollTop = 0;
 }
 
 function removeItem(index){
   cart.splice(index,1);
-  updateCart();
+  renderCart();
 }
+function renderCart(){
+  document.getElementById('count').innerText = cart.length;
+  const items = document.getElementById('cartItems');
+  const total = document.querySelector('.cart-total');
 
-function closeCart(){
-  document.getElementById('cart').classList.remove('active');
-}
+  items.innerHTML = '';
 
-function checkoutIndia(){
-  if(cart.length === 0){alert('Your cart is empty');return;}
-  alert('India checkout initiated. Integrate Razorpay here.');
-}
+  if(cart.length === 0){
+    total.innerHTML = '<span style="opacity:.6;font-size:12px">Your cart is empty.</span>';
+    return;
+  }
 
-function checkoutInternational(){
-  if(cart.length === 0){alert('Your cart is empty');return;}
-  alert('International checkout initiated. Integrate Stripe / PayPal here.');
-}
+  cart.forEach((item,index)=>{
+    const d = document.createElement('div');
+    d.className = 'cart-item';
+    d.innerHTML = `
+      <span>${item}</span>
+      <span>₹ ${PRICE_INR}</span>
+      <span class="remove-item" onclick="removeItem(${index})">×</span>
+    `;
+    items.appendChild(d);
+  });
 
-// --- PREBOOK POPUP ---
-function openPrebookPopup(){
-  document.getElementById('prebook').classList.add('active');
-}
-function closePrebookPopup(){
-  document.getElementById('prebook').classList.remove('active');
-}
+  total.innerHTML = `
+    <strong>India</strong><br>
+    Price: ₹ ${PRICE_INR * cart.length}<br>
+    <span style="font-size:11px;opacity:.75">Inclusive of all applicable taxes (GST included)</span><br><br>
 
-console.assert(typeof addToCart === 'function', 'addToCart should be defined');
+    <strong>International</strong><br>
+    Product: $ ${INTL_PRODUCT_USD * cart.length}<br>
+    Delivery: $ ${INTL_DELIVERY_USD * cart.length}<br>
+    <span style="font-size:11px;opacity:.75">Customs duties & import taxes (if any) are borne by the customer</span><br>
+    <strong>Total: $ ${INTL_TOTAL_USD * cart.length}</strong>
+  `;
+
+  // Update checkout button labels with payable totals
+  document.getElementById('checkoutIndiaBtn').innerText = `Checkout India – ₹ ${PRICE_INR * cart.length}`;
+  document.getElementById('checkoutIntlBtn').innerText = `Checkout International – $ ${INTL_TOTAL_USD * cart.length}`;
+}
+function scrollToBuy(){document.getElementById('cafe').scrollIntoView({behavior:'smooth'})}
+function checkoutIndia(){alert('Integrate Razorpay')}
+function checkoutInternational(){alert('Integrate Stripe / PayPal')}
+const observer=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.15});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 </script>
 
-<div class="cart" id="prebook" style="background:rgba(244,239,233,.98)">
-  <div class="cart-header">
-    <h2>Next Release</h2>
-    <div class="close-cart" onclick="closePrebookPopup()">×</div>
-  </div>
-  <p style="margin-top:24px">This month's allocation is complete.</p>
-  <p>Leave your email to be notified when the next release becomes available.</p>
-  <input type="email" placeholder="Your email" style="margin-top:24px;width:100%;padding:12px;border:1px solid var(--line);background:transparent" />
-  <div class="bean-btn" style="margin-top:24px" onclick="closePrebookPopup()">Notify me</div>
-</div>
 </body>
 </html>
