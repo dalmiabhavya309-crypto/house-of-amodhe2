@@ -90,21 +90,23 @@ nav a:hover{color:var(--accent)}
 .nav-cart{background:linear-gradient(135deg,#F6F0E8,#DED3C6);color:#120D09}
 .nav-cart:hover{background:linear-gradient(135deg,#9F6B34,#C18A4A);color:#120D09}
 
-/* Batch status strip – DECORATIVE PREORDER */
+/* Batch status strip – DECORATIVE PREORDER (RESPONSIVE) */
 .batch-strip{
   position:fixed;
   top:56px;
   left:0;right:0;
-  height:38px;
+  min-height:38px;
+  padding:6px 10px;
   background:linear-gradient(180deg,#7A1414,#9C2A2A);
   color:#F9F4EE;
   font-size:11px;
-  letter-spacing:.26em;
+  letter-spacing:.22em;
   text-transform:uppercase;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:14px;
+  gap:12px;
+  text-align:center;
   z-index:9;
 }
 .batch-strip::before,
@@ -112,6 +114,20 @@ nav a:hover{color:var(--accent)}
   content:"✦";
   font-size:12px;
   opacity:.7;
+}
+
+@media(max-width:600px){
+  .batch-strip{
+    top:52px;
+    font-size:9px;
+    letter-spacing:.16em;
+    padding:6px 14px;
+    line-height:1.4;
+  }
+  .batch-strip::before,
+  .batch-strip::after{
+    display:none; /* keep clean on mobile */
+  }
 }
 
 /* ==============================
@@ -316,7 +332,7 @@ footer{padding:58px 18px;border-top:1px solid var(--line);font-size:11px;letter-
       <div class="availability">
         <div class="availability-month">February Edition</div>
         <div><span>Monthly</span><strong>20</strong></div>
-        <div><span>Sold</span><strong>6</strong></div>
+        <div><span>Booked</span><strong>6</strong></div>
         <div><span>Left</span><strong>14</strong></div>
       </div>
       <a class="bean-btn" href="mailto:amodheperfumes@gmail.com?subject=Pre-book%20request%20for%20Caf%C3%A9%20Ambr%C3%A9&body=Hello%20House%20of%20Amodhe,%0A%0AI%20would%20like%20to%20pre-book%20the%20next%20batch%20of%20Caf%C3%A9%20Ambr%C3%A9.%0A%0AName:%0ACity:%0APhone:%0A%0AThank%20you."><span class="btn-line-1">PREBOOK</span></a>
