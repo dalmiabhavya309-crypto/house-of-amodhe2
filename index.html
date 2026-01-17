@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>House of Amodhe – Café Ambré</title>
-<meta name="description" content="House of Amodhe. Café Ambré. Limited monthly release of twenty bottles." />
+<title>House of Amodhé – Café Ambré</title>
+<meta name="description" content="House of Amodhé. Café Ambré. Limited monthly release of twenty bottles." />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
 
 <style>
@@ -210,6 +210,7 @@ p{margin:26px auto 0;max-width:700px;color:var(--ink-muted);text-align:center}
 .remove-item{cursor:pointer;font-size:18px;opacity:.6}
 .remove-item:hover{opacity:1}
 .cart-total{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;line-height:1.7}
+.code-badge{display:inline-block;margin:8px 0 10px;padding:6px 14px;border-radius:999px;background:linear-gradient(135deg,#9F6B34,#C18A4A);color:#120D09;font-size:9px;letter-spacing:.22em;text-transform:uppercase;box-shadow:0 6px 14px rgba(0,0,0,.18)}
 
 /* ==============================
    BUTTON SYSTEM (UNIFIED)
@@ -300,18 +301,18 @@ footer{padding:58px 18px;border-top:1px solid var(--line);font-size:11px;letter-
     <a href="#house">Philosophy</a>
   </div>
   <div class="nav-right">
-    <a class="nav-buy" href="mailto:amodheperfumes@gmail.com?subject=Pre-book%20request%20for%20Caf%C3%A9%20Ambr%C3%A9&body=Hello%20House%20of%20Amodhe,%0A%0AI%20would%20like%20to%20pre-book%20the%20next%20batch%20of%20Caf%C3%A9%20Ambr%C3%A9.%0A%0AName:%0ACity:%0APhone:%0A%0AThank%20you.">Prebook</a>
+    <a class="nav-buy" href="mailto:amodheperfumes@gmail.com?subject=Prebook%20%E2%80%93%20Caf%C3%A9%20Ambr%C3%A9&body=Hello%20House%20of%20Amodh%C3%A9,%0A%0AI%20would%20like%20to%20prebook%20Caf%C3%A9%20Ambr%C3%A9.%0A%0AName:%0ACity:%0APhone:%0A%0AThank%20you.">Prebook Café Ambré</a>
     <a class="nav-buy nav-cart" href="javascript:void(0)" onclick="openCart()">Cart (<span id="count">0</span>)</a>
   </div>
 </nav>
 
 <!-- Batch status strip -->
-<div class="batch-strip">Now open for preorder · first batch in progress</div>
+<div class="batch-strip">First batch in progress · Now available to purchase</div>
 
 <section id="home" class="hero reveal">
   <div>
-    <h1>House of Amodhe</h1>
-    <p>Quiet perfumery. Made slowly.</p>
+    <h1>House of Amodhé</h1>
+    <p>Quiet fragrance. Made slowly.</p>
     <p style="font-size:13px;letter-spacing:.18em;margin-top:10px;color:var(--ink-muted)">Limited availability. Twenty bottles, every month.</p>
   </div>
 </section>
@@ -324,18 +325,22 @@ footer{padding:58px 18px;border-top:1px solid var(--line);font-size:11px;letter-
     <img src="images/Cafe_Ambre_Label.png" alt="Café Ambré label design" />
     <img src="images/Cafe_Ambre_Ingredients_Background.png" alt="Café Ambré coffee chocolate vanilla notes" />
     <div>
-      <p>Dark roasted coffee softened by warm amber.</p>
-      <p>A dry, restrained opening with no sweetness.</p>
-      <p>Stays close to skin, unfolding slowly.</p>
+      <p>Dark roasted coffee, deep and smouldering, softened by the quiet glow of amber.</p>
+      <p>An opening that is dry and restrained, never sweet, never loud.</p>
+      <p>It lingers close, unfolding slowly with warmth and intimacy.</p>
       <div class="price">₹ 5,999<span>$ 72 USD</span></div>
       
       <div class="availability">
         <div class="availability-month">February Edition</div>
         <div><span>Monthly</span><strong>20</strong></div>
-        <div><span>Booked</span><strong>6</strong></div>
-        <div><span>Left</span><strong>14</strong></div>
+        <div><span>Booked</span><strong>9</strong></div>
+        <div><span>Left</span><strong>11</strong></div>
       </div>
-      <a class="bean-btn" href="mailto:amodheperfumes@gmail.com?subject=Pre-book%20request%20for%20Caf%C3%A9%20Ambr%C3%A9&body=Hello%20House%20of%20Amodhe,%0A%0AI%20would%20like%20to%20pre-book%20the%20next%20batch%20of%20Caf%C3%A9%20Ambr%C3%A9.%0A%0AName:%0ACity:%0APhone:%0A%0AThank%20you."><span class="btn-line-1">PREBOOK</span></a>
+      <a class="bean-btn" href="mailto:amodheperfumes@gmail.com?subject=Prebook%20%E2%80%93%20Caf%C3%A9%20Ambr%C3%A9&body=Hello%20House%20of%20Amodh%C3%A9,%0A%0AI%20would%20like%20to%20prebook%20Caf%C3%A9%20Ambr%C3%A9.%0A%0AName:%0ACity:%0APhone:%0A%0AThank%20you." style="text-decoration:none">
+        <span class="btn-line-1">PREBOOK CAFÉ AMBRÉ</span>
+        <span class="btn-line-2">LIMITED EDITION</span>
+      </a>
+      
     </div>
   </div>
 </section>
@@ -371,23 +376,26 @@ footer{padding:58px 18px;border-top:1px solid var(--line);font-size:11px;letter-
 
 <section id="faq" class="reveal">
   <h2>Quiet Questions</h2>
-  <p><strong>Is Café Ambré gendered?</strong> No. It is composed for skin.</p>
-  <p><strong>Longevity?</strong> An extrait that evolves slowly for hours.</p>
+  <p><strong>Is Café Ambré gendered?</strong> No. It is composed to feel intimate and understated.</p>
+  <p><strong>Longevity?</strong> A composition that evolves slowly over hours.</p>
   <p><strong>Availability?</strong> Released monthly in limited quantity.</p>
+  <p style="margin-top:18px;font-size:12px;letter-spacing:.04em;opacity:.65;text-align:center">Designed primarily for garments and textiles. Avoid direct application on skin.</p>
 </section>
+
+
 
 <div class="section-divider"></div>
 
 <section id="house" class="reveal">
-  <h2>The House of Amodhe</h2>
-  <p>A quiet alternative to modern perfumery.</p>
+  <h2>The House of Amodhé</h2>
+  <p>A quiet alternative to modern fragrance culture.</p>
   <p>Designed for intimacy, depth, and restraint.</p>
-  <p>This is slow perfumery.</p>
+  <p>This is slow fragrance.</p>
 </section>
 
 <footer>
   <div>
-    HOUSE OF AMODHÈ<br><br>
+    HOUSE OF AMODHÉ<br><br>
     Manufactured & marketed by Shri Shubh Laxmi Scales<br>
     GSTIN: 08AAMPD5461E1ZT
   </div>
@@ -395,7 +403,7 @@ footer{padding:58px 18px;border-top:1px solid var(--line);font-size:11px;letter-
     amodheperfumes@gmail.com<br>
     Instagram @amodheperfumes
   </div>
-  <div>© 2025 House of Amodhè</div>
+  <div>© 2025 House of Amodhé</div>
 </footer>
 
 <div class="cart" id="cart">
@@ -409,6 +417,22 @@ footer{padding:58px 18px;border-top:1px solid var(--line);font-size:11px;letter-
     <strong>India:</strong> Prices shown are inclusive of all applicable taxes (GST included).<br>
     <strong>International:</strong> Customs duties & import taxes (if any) are borne by the customer.
   </div>
+
+  <!-- Creator Code (10% off) -->
+  <div style="margin:10px 0 16px 0;display:flex;gap:8px;align-items:center">
+    <input id="creatorCode" type="text" placeholder="Creator code" style="flex:1;padding:10px 12px;border:1px solid rgba(159,107,52,.35);border-radius:10px;background:#fff;font-size:13px;letter-spacing:.08em" />
+    <button class="checkout-btn" style="padding:10px 14px;font-size:10px" onclick="applyCreatorCode()">Apply</button>
+  </div>
+  <div id="codeMsg" style="font-size:11px;line-height:1.4;color:var(--ink-muted);min-height:16px"></div>
+
+  <!-- Hidden Netlify form to store creator codes (no email to customer) -->
+  <form name="creator-codes" method="POST" data-netlify="true" hidden>
+    <input type="hidden" name="form-name" value="creator-codes" />
+    <input type="text" name="code" />
+    <input type="text" name="time" />
+    <input type="text" name="items" />
+  </form>
+
   <div id="cartItems"></div>
   <div class="cart-total"></div>
   <div class="checkout-btn" id="checkoutIndiaBtn" onclick="checkoutIndia()">Checkout India</div>
@@ -419,13 +443,19 @@ footer{padding:58px 18px;border-top:1px solid var(--line);font-size:11px;letter-
 let cart=[];
 const PRICE_INR=5999;
 const INTL_PRODUCT_USD=72;
-const INTL_DELIVERY_USD=38;
-const INTL_TOTAL_USD=110;
+const INTL_DELIVERY_USD=25;
+const DISCOUNT_RATE = 0.10;
+let appliedCode = null; // single declaration (bug fixed)
 
 function openCart(){document.getElementById('cart').classList.add('active')}
 function closeCart(){document.getElementById('cart').classList.remove('active')}
+
 function addToCart(){
-  if(cart.length>=2){alert('Maximum 2 bottles per customer');return}
+  if(cart.length >= 1){
+    alert('Limit reached: only 1 bottle per customer.');
+    openCart();
+    return;
+  }
   cart.push('Café Ambré');
   renderCart();
   openCart();
@@ -435,6 +465,43 @@ function removeItem(index){
   cart.splice(index,1);
   renderCart();
 }
+
+function applyCreatorCode(){
+  const input = document.getElementById('creatorCode');
+  const msg = document.getElementById('codeMsg');
+  const code = (input.value || '').trim().toUpperCase();
+
+  const VALID_CODE = 'TALK10';
+
+  if(!code){ msg.innerText = 'Enter a creator code.'; return; }
+
+  if(code !== VALID_CODE){
+    msg.innerText = 'Invalid code.';
+    appliedCode = null;
+    renderCart();
+    return;
+  }
+
+  if(appliedCode === VALID_CODE){
+    msg.innerText = 'Code already applied.';
+    return;
+  }
+
+  appliedCode = VALID_CODE;
+  msg.innerText = 'Code applied successfully.';
+
+  // Store valid code silently using Netlify Forms
+  const formData = new FormData();
+  formData.append('form-name', 'creator-codes');
+  formData.append('code', VALID_CODE);
+  formData.append('time', new Date().toISOString());
+  formData.append('items', cart.length.toString());
+
+  fetch('/', { method: 'POST', body: formData }).catch(()=>{});
+
+  renderCart();
+}
+
 function renderCart(){
   document.getElementById('count').innerText = cart.length;
   const items = document.getElementById('cartItems');
@@ -444,6 +511,8 @@ function renderCart(){
 
   if(cart.length === 0){
     total.innerHTML = '<span style="opacity:.6;font-size:12px">Your cart is empty.</span>';
+    document.getElementById('checkoutIndiaBtn').innerText = 'Checkout India';
+    document.getElementById('checkoutIntlBtn').innerText = 'Checkout International';
     return;
   }
 
@@ -458,26 +527,57 @@ function renderCart(){
     items.appendChild(d);
   });
 
+  const qty = cart.length;
+  const discount = appliedCode ? DISCOUNT_RATE : 0;
+
+  const inrSubtotal = PRICE_INR * qty;
+  const inrDiscount = Math.round(inrSubtotal * discount);
+  const inrPayable = inrSubtotal - inrDiscount;
+
+  const usdProduct = INTL_PRODUCT_USD * qty;
+  const usdDiscount = +(usdProduct * discount).toFixed(2);
+  const usdDelivery = INTL_DELIVERY_USD * qty;
+  const usdPayable = +(usdProduct - usdDiscount + usdDelivery).toFixed(2);
+
   total.innerHTML = `
+    ${appliedCode ? '<span class="code-badge">TALK10 APPLIED</span><br>' : ''}
     <strong>India</strong><br>
-    Price: ₹ ${PRICE_INR * cart.length}<br>
-    <span style="font-size:11px;opacity:.75">Inclusive of all applicable taxes (GST included)</span><br><br>
+    Price: ₹ ${inrSubtotal}<br>
+    ${appliedCode ? `<span>Discount (10%): − ₹ ${inrDiscount}</span><br>` : ''}
+    <span style="font-size:11px;opacity:.75">Inclusive of all applicable taxes (GST included)</span><br>
+    <strong>Payable: ₹ ${inrPayable}</strong><br><br>
 
     <strong>International</strong><br>
-    Product: $ ${INTL_PRODUCT_USD * cart.length}<br>
-    Delivery: $ ${INTL_DELIVERY_USD * cart.length}<br>
+    Product: $ ${usdProduct}<br>
+    ${appliedCode ? `<span>Discount (10%): − $ ${usdDiscount}</span><br>` : ''}
+    Delivery: $ ${usdDelivery}<br>
     <span style="font-size:11px;opacity:.75">Customs duties & import taxes (if any) are borne by the customer</span><br>
-    <strong>Total: $ ${INTL_TOTAL_USD * cart.length}</strong>
+    <strong>Payable: $ ${usdPayable}</strong>
   `;
 
-  // Update checkout button labels with payable totals
-  document.getElementById('checkoutIndiaBtn').innerText = `Checkout India – ₹ ${PRICE_INR * cart.length}`;
-  document.getElementById('checkoutIntlBtn').innerText = `Checkout International – $ ${INTL_TOTAL_USD * cart.length}`;
+  document.getElementById('checkoutIndiaBtn').innerText = `Checkout India – ₹ ${inrPayable}`;
+  document.getElementById('checkoutIntlBtn').innerText = `Checkout International – $ ${usdPayable}`;
 }
-function scrollToBuy(){document.getElementById('cafe').scrollIntoView({behavior:'smooth'})}
-function checkoutIndia(){alert('Integrate Razorpay')}
-function checkoutInternational(){alert('Integrate Stripe / PayPal')}
-const observer=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.15});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+function scrollToBuy(){
+  document.getElementById('cafe').scrollIntoView({behavior:'smooth'});
+}
+
+function checkoutIndia(){
+  if(cart.length===0){alert('Cart is empty');return}
+  alert('Integrate Razorpay');
+}
+
+function checkoutInternational(){
+  if(cart.length===0){alert('Cart is empty');return}
+  alert('Integrate Stripe / PayPal');
+}
+
+const observer=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')});
+},{threshold:.15});
+
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 </script>
 
 </body>
