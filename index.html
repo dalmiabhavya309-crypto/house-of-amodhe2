@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>House of Amodhé – Café Ambré</title>
-<meta name="description" content="House of Amodhé. Café Ambré. Limited monthly release of twenty bottles." />
+<meta name="description" content="House of Amodhé. Café Ambré. Only twenty bottles will ever be made." />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
 
 <style>
@@ -179,13 +179,12 @@ footer{padding:58px 18px;border-top:1px solid var(--line);font-size:11px;letter-
   </div>
 </nav>
 
-<div class="batch-strip">First batch in progress · Now available to purchase</div>
+<div class="batch-strip">Only 20 bottles will ever be made · Once sold out, it will never be produced again</div>
 
 <section id="home" class="hero reveal">
   <div>
     <h1>House of Amodhé</h1>
     <p>Artisanally blended in small batches.</p>
-    <p style="font-size:13px;letter-spacing:.18em;margin-top:10px;color:var(--ink-muted)">Limited availability. Twenty bottles, every month.</p>
   </div>
 </section>
 
@@ -201,12 +200,14 @@ footer{padding:58px 18px;border-top:1px solid var(--line);font-size:11px;letter-
       <p>Dark roasted coffee, deep and smouldering, softened by the quiet glow of amber.</p>
       <p>An opening that is dry and restrained, never sweet, never loud.</p>
       <p>It lingers close, unfolding slowly with warmth and intimacy.</p>
-      <div class="price">₹ 5,999<span>$ 72 USD</span></div>
+      <div class="price">₹ 7,540</div>
+      <p style="font-size:12px;letter-spacing:.18em;margin-top:10px;color:var(--ink-muted)">Strictly limited to twenty bottles worldwide. Never reproduced.</p>
       <div class="availability">
-        <div><span>Monthly</span><strong>20</strong></div>
-        <div><span>Booked</span><strong>9</strong></div>
-        <div><span>Left</span><strong>11</strong></div>
+        <div><span>Total</span><strong id="totalCount">20</strong></div>
+        <div><span>Sold</span><strong id="soldCount">4</strong></div>
+        <div><span>Remaining</span><strong id="remainingCount">16</strong></div>
       </div>
+
       <a class="bean-btn" href="javascript:void(0)" onclick="addToCart()">
         <span class="btn-line-1">BUY NOW</span>
         <span class="btn-line-2">LIMITED EDITION</span>
@@ -228,9 +229,9 @@ footer{padding:58px 18px;border-top:1px solid var(--line);font-size:11px;letter-
 
 <section id="edition" class="reveal">
   <h2>Edition Statement</h2>
-  <p>Café Ambré is released once every month.</p>
-  <p>Each edition is limited to twenty bottles only.</p>
-  <p>When sold out, production pauses until the next cycle.</p>
+  <p>Only twenty bottles of Café Ambré will ever exist.</p>
+  <p>There will be no restock, no reformulation, and no second release.</p>
+  <p>Once this edition is complete, it becomes part of the past.</p>
 </section>
 
 <div class="section-divider"></div>
@@ -260,12 +261,12 @@ footer{padding:58px 18px;border-top:1px solid var(--line);font-size:11px;letter-
   <div id="cartProduct" style="display:none;margin:6px 0 16px 0;text-align:left">
     <div style="font-family:'Playfair Display',serif;font-size:20px;letter-spacing:.04em">Café Ambré</div>
     <div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-muted)">Parfum · 50 ml</div>
-    <div style="margin-top:6px;font-size:14px">₹ 5,999</div>
+    <div style="margin-top:6px;font-size:14px">₹ 7,540</div>
   </div>
 
   <div style="margin:6px 0 16px 0;display:flex;gap:8px;align-items:center">
     <input id="creatorCode" type="text" placeholder="Creator code" style="flex:1;padding:10px 12px;border:1px solid rgba(159,107,52,.35);border-radius:10px;background:#fff;font-size:13px;letter-spacing:.08em" />
-    <button class="checkout-btn" style="padding:10px 14px;font-size:10px" onclick="applyCreatorCode()">Apply</button>
+    <button id="applyCodeBtn" class="checkout-btn" style="padding:10px 14px;font-size:10px" onclick="applyCreatorCode()">Apply</button>
   </div>
   <div id="codeMsg" style="font-size:11px;line-height:1.4;color:var(--ink-muted);min-height:16px"></div>
 
@@ -283,15 +284,45 @@ footer{padding:58px 18px;border-top:1px solid var(--line);font-size:11px;letter-
   <div id="cartItems"></div>
   <div class="cart-total"></div>
   <div class="checkout-btn" id="checkoutIndiaBtn" onclick="checkoutIndia()">Checkout India</div>
-  <div class="checkout-btn" id="checkoutIntlBtn" onclick="checkoutInternational()">Checkout International</div>
+  
 </div>
 
 <script>
 let cart = [];
-const PRICE_INR = 5999;
-const INTL_PRODUCT_USD = 72;
-const INTL_DELIVERY_USD = 25;
+const PRICE_INR = 7540;
 let appliedCode = null;
+
+// --- STOCK IS NOW SERVER-DRIVEN (CHANGES ONLY AFTER PAYMENT CONFIRMATION) ---
+// The site fetches live stock from a backend endpoint instead of hardcoding numbers.
+// This requires a Netlify Function at: /.netlify/functions/stock
+// That function should return JSON like: { total: 20, sold: 4, remaining: 16 }
+
+async function fetchStock(){
+  try{
+    const res = await fetch('/.netlify/functions/stock', { cache: 'no-store' });
+    if(!res.ok) throw new Error('Stock fetch failed');
+    const data = await res.json();
+
+    const totalEl = document.getElementById('totalCount');
+    const soldEl = document.getElementById('soldCount');
+    const remainingEl = document.getElementById('remainingCount');
+
+    if(totalEl) totalEl.innerText = data.total;
+    if(soldEl) soldEl.innerText = data.sold;
+    if(remainingEl) remainingEl.innerText = data.remaining;
+  }catch(err){
+    console.warn('Live stock unavailable, keeping placeholders.', err);
+  }
+}
+
+// Fetch stock on load and refresh every 20 seconds
+// SAFE: will not break even if function/endpoint missing
+window.addEventListener('DOMContentLoaded', () => {
+  if(typeof fetchStock === 'function'){
+    fetchStock();
+    setInterval(fetchStock, 20000);
+  }
+});
 
 function openCart(){ document.getElementById('cart').classList.add('active'); }
 function closeCart(){ document.getElementById('cart').classList.remove('active'); }
@@ -311,11 +342,16 @@ function applyCreatorCode(){
   const code = (input.value || '').trim().toUpperCase();
 
   const CODES = {
-    'TALK10': { rate: 0.10 },
-    'EDDIE20': { rate: 0.20 }
+    'TALK10': { rate: 0.10 }
   };
 
-  if(!code){ msg.innerText = 'Enter a creator code.'; return; }
+  if(!code){
+    msg.innerText = 'Enter a creator code.';
+    appliedCode = null;
+    renderCart();
+    return;
+  }
+
   if(!CODES[code]){
     msg.innerText = 'Invalid code.';
     appliedCode = null;
@@ -323,8 +359,9 @@ function applyCreatorCode(){
     return;
   }
 
+  // Allow reuse: applying again simply re-applies the same valid code
   appliedCode = code;
-  msg.innerText = `Code ${code} applied successfully.`;
+  msg.innerText = `Code ${code} applied.`;
   renderCart();
 }
 
@@ -339,7 +376,7 @@ function renderCart(){
     document.getElementById('cartProduct').style.display = 'none';
     total.innerHTML = '<span style="opacity:.6;font-size:12px">Your cart is empty.</span>';
     document.getElementById('checkoutIndiaBtn').innerText = 'Checkout India';
-    document.getElementById('checkoutIntlBtn').innerText = 'Checkout International';
+    
     return;
   }
 
@@ -356,39 +393,24 @@ function renderCart(){
 
   let discountRate = 0;
   if(appliedCode === 'TALK10') discountRate = 0.10;
-  if(appliedCode === 'EDDIE20') discountRate = 0.20;
 
   const inrSubtotal = PRICE_INR * qty;
   const inrDiscount = Math.round(inrSubtotal * discountRate);
   const inrPayable = inrSubtotal - inrDiscount;
 
-  const usdProduct = INTL_PRODUCT_USD * qty;
-  const usdDelivery = INTL_DELIVERY_USD * qty;
-  const usdDiscount = +(usdProduct * discountRate).toFixed(2);
-  const usdPayable = +((usdProduct - usdDiscount) + usdDelivery).toFixed(2);
-
-  total.innerHTML = `
-    ${appliedCode ? `<span class="code-badge">${appliedCode} APPLIED</span><br>` : ''}
+    total.innerHTML = `
+    ${appliedCode ? `<span class=\"code-badge\">${appliedCode} APPLIED</span><br>` : ''}
 
     <strong>India</strong><br>
     Price: ₹ ${inrSubtotal}<br>
     ${appliedCode ? `<span>Discount: − ₹ ${inrDiscount}</span><br>` : ''}
-    <strong>Payable: ₹ ${inrPayable}</strong><br><br>
-
-    <strong>International</strong><br>
-    Product: $ ${usdProduct}<br>
-    Delivery: $ ${usdDelivery}<br>
-    ${appliedCode ? `<span>Discount on product: − $ ${usdDiscount}</span><br>` : ''}
-    <strong>Payable: $ ${usdPayable}</strong>
+    ${appliedCode ? `<span>You saved ₹ ${inrDiscount}</span><br>` : ''}
+    <strong>Payable: ₹ ${inrPayable}</strong>
   `;
 
   document.getElementById('checkoutIndiaBtn').innerText = appliedCode
     ? `Checkout India (${appliedCode}) – ₹ ${inrPayable}`
     : `Checkout India – ₹ ${inrPayable}`;
-
-  document.getElementById('checkoutIntlBtn').innerText = appliedCode
-    ? `Checkout International (${appliedCode}) – $ ${usdPayable}`
-    : `Checkout International – $ ${usdPayable}`;
 }
 
 function checkoutIndia(){
@@ -403,43 +425,24 @@ function checkoutIndia(){
     }
   }
 
-  const normalLink = 'https://rzp.io/rzp/CJXsonL';
-  const discountedLink = 'https://rzp.io/rzp/0OnPKtH';
+    const normalLink = 'https://rzp.io/rzp/ez7NjKQ';
+    const discountedLink = 'https://rzp.io/rzp/APhOTZ7d';
 
   const base = (appliedCode === 'TALK10') ? discountedLink : normalLink;
   window.location.href = base;
 }
 
-function checkoutInternational(){
-  if(cart.length === 0){ alert('Cart is empty'); return; }
-
-  const fields = ['shipName','shipEmail','shipPhone','shipAddress','shipCity','shipState','shipCountry','shipPincode'];
-  for(const id of fields){
-    const el = document.getElementById(id);
-    if(!el || !el.value.trim()){
-      alert('Please fill all shipping fields before checkout.');
-      return;
-    }
-  }
-
-  const normalIntl = 'https://www.paypal.com/ncp/payment/ZUW7N4P86ELR8';
-  const talk10Intl = 'https://www.paypal.com/ncp/payment/LX3F5FTKH4RC4';
-  const eddie20Intl = 'https://www.paypal.com/ncp/payment/YDSCMYJPZTFFU';
-
-  let target = normalIntl;
-  if(appliedCode === 'TALK10') target = talk10Intl;
-  if(appliedCode === 'EDDIE20') target = eddie20Intl;
-
-  window.location.href = target;
-}
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
 },{threshold:.15});
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// NOTE:
+// Sold count is NOT modified anywhere in frontend code.
+// It must only be updated by your payment webhook (Razorpay → Netlify Function → database/file).
 </script>
 
 </body>
 </html>
-
